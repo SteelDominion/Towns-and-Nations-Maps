@@ -28,11 +28,11 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build (shadowJar)
-        run: ./gradlew :shadowJar --console=plain
+        run: ./gradlew :TownsAndNations-bluemap:shadowJar --console=plain
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: TownsAndNations-Maps
-          path: build/libs/TownsAndNations-*.jar
+          name: TownsAndNations-bluemap
+          path: TownsAndNations-bluemap/build/libs/TownsAndNations-*.jar
           if-no-files-found: error

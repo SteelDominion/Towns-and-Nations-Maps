@@ -1,5 +1,15 @@
 plugins {
     id "java"
+    id "com.gradleup.shadow" version "8.3.7"
+}
+
+shadowJar {
+    archiveBaseName = "TownsAndNations-bluemap"
+}
+
+tasks.shadowJar {
+    archiveClassifier.set('')
+    relocate 'org.bstats', 'org.leralix.tan.bstat'
 }
 
 repositories {
