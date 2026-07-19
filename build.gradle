@@ -1,9 +1,19 @@
 plugins {
     id 'java'
+    id "com.gradleup.shadow" version "8.3.7"
 }
 
 java {
     toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+shadowJar {
+    archiveBaseName = "TownsAndNations-Maps"
+}
+
+tasks.shadowJar {
+    archiveClassifier.set('')
+    relocate 'org.bstats', 'org.leralix.tan.bstat'
 }
 
 subprojects {

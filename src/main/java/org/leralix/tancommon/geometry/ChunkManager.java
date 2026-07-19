@@ -4,12 +4,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.leralix.tancommon.markers.CommonMarkerRegister;
 import org.leralix.tancommon.storage.PolygonCoordinate;
-import org.leralix.tancommon.storage.RegionDescriptionStorage;
 import org.leralix.tancommon.storage.TileFlags;
+import org.leralix.tancommon.storage.NationDescriptionStorage;
+import org.leralix.tancommon.storage.RegionDescriptionStorage;
 import org.leralix.tancommon.storage.TownDescriptionStorage;
 import org.tan.api.interfaces.chunk.TanClaimedChunk;
-import org.tan.api.interfaces.territory.TanRegion;
 import org.tan.api.interfaces.territory.TanTerritory;
+import org.tan.api.interfaces.territory.TanNation;
+import org.tan.api.interfaces.territory.TanRegion;
 import org.tan.api.interfaces.territory.TanTown;
 
 import java.util.ArrayDeque;
@@ -36,6 +38,10 @@ public class ChunkManager {
     public void update(TanRegion region) {
         String infoWindowPopup = RegionDescriptionStorage.get(region.getID()).getChunkDescription();
         updateTerritory(region, infoWindowPopup);
+    }
+    public void update(TanNation nation) {
+        String infoWindowPopup = NationDescriptionStorage.get(nation.getID()).getChunkDescription();
+        updateTerritory(nation, infoWindowPopup);
     }
 
     private void updateTerritory(TanTerritory territory, String infoWindowPopup) {
