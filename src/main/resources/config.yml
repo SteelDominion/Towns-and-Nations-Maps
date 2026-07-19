@@ -114,6 +114,17 @@ town_infowindow: "<div style=\"white-space: nowrap\"><div class=\"infowindow\"><
 
 region_infowindow: "<div style=\"white-space: nowrap\"><div class=\"infowindow\"> <span style=\"font-size:140%;font-weight:bold;\">%REGION_NAME%</span>  <span style=\"font-size:80%\">Created %DAYS_SINCE_CREATION% day(s) ago</span><br><br><span style=\"font-size:100%;font-style:italic;\">%DESCRIPTION%</span><br><hr><span style=\"font-size:100%;\"><b>Claims</b> %NUMBER_CLAIMS% <b>|</b> <b>Number of towns</b> %NUMBER_OF_TOWNS% </span><hr><br><span style=\"font-weight:bold;\">Capital</span><br>%REGION_CAPITAL%<br><br><span style=\"font-weight:bold;\">Towns</span><br>%TOWN_LIST%<br></div></div>"
 
+# %NATION_NAME% - Name of the nation
+# %DAYS_SINCE_CREATION% - Number of days since the town or nation was created
+# %DESCRIPTION% - Description of the town or nation
+# %NUMBER_CLAIMS% - Number of claims in the town or nation
+# %NUMBER_OF_TOWNS% - Number of towns in the nation
+# %TOWN_LIST% - List of towns in the nation
+# %NATION_CAPITAL% - Capital of the nation
+
+nation_infowindow: "<div style=\"white-space: nowrap\"><div class=\"infowindow\"> <span style=\"font-size:140%;font-weight:bold;\">%NATION_NAME%</span>  <span style=\"font-size:80%\">Created %DAYS_SINCE_CREATION% day(s) ago</span><br><br><span style=\"font-size:100%;font-style:italic;\">%DESCRIPTION%</span><br><hr><span style=\"font-size:100%;\"><b>Claims</b> %NUMBER_CLAIMS% <b>|</b> <b>Number of towns</b> %NUMBER_OF_TOWNS% </span><hr><br><span style=\"font-weight:bold;\">Capital</span><br>%NATION_CAPITAL%<br><br><span style=\"font-weight:bold;\">Towns</span><br>%TOWN_LIST%<br></div></div>"
+
+
 # %LANDMARK_NAME% - Name of the landmark
 # %OWNER% - Owner of the landmark.
 # %QUANTITY%x - Quantity of the item being produced.
