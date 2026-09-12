@@ -62,6 +62,12 @@ public class Pl3xmapMarkerRegister extends CommonMarkerRegister {
     }
 
     @Override
+    protected void setupOccupiedChunkLayer(String id, String name, int minZoom, int priority,
+                                   boolean hideByDefault, List<String> worldsName) {
+        createLayers(id, name, priority, hideByDefault, worldsName, chunkLayerMap);
+    }
+
+    @Override
     protected void setupFortLayer(String id, String name, int minZoom, int priority,
                                   boolean hideByDefault, List<String> worldsName) {
         createLayers(id, name, priority, hideByDefault, worldsName, fortLayerMap);

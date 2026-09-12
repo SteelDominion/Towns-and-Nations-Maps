@@ -38,6 +38,7 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
     private BlueMapAPI api;
 
     private final Map<TanKey, MarkerSet> chunkLayerMap;
+    private final Map<TanKey, MarkerSet> occupiedChunkLayerMap;
     private final Map<TanKey, MarkerSet> landmarkLayerMap;
     private final Map<TanKey, MarkerSet> fortLayerMap;
     private final Map<TanKey, MarkerSet> propertyLayerMap;
@@ -46,6 +47,7 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
         super();
         BlueMapAPI.onEnable(bluemapApi -> this.api = bluemapApi);
         this.chunkLayerMap = new HashMap<>();
+        this.occupiedChunkLayerMap = new HashMap<>();
         this.landmarkLayerMap = new HashMap<>();
         this.fortLayerMap = new HashMap<>();
         this.propertyLayerMap = new HashMap<>();
@@ -59,6 +61,11 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
     @Override
     protected void setupChunkLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName) {
         setupLayer(id, name, chunkLayerPriority, hideByDefault, worldsName, chunkLayerMap);
+    }
+
+    @Override
+    protected void setupOccupiedChunkLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName) {
+        setupLayer(id, name, chunkLayerPriority, hideByDefault, worldsName, occupiedChunkLayerMap);
     }
 
     @Override
@@ -176,6 +183,40 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
             return;
         }
 
+        Shape shape = getVector(coordinates);
+
+        Collection<Shape> holesList = new ArrayList<>();
+        for (PolygonCoordinate hole : holes) {
+            holesList.add(getVector(hole));
+        }
+
+        Color color = new Color(territoryData.getColor().asRGB());
+        Color lineColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.8f);
+        Color fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.5f);
+
+        ShapeMarker shapeMarker = ShapeMarker.builder()
+                .shape(shape, 70)
+                .label(territoryData.getName())
+                .detail(infoWindowPopup)
+                .lineColor(lineColor)
+                .fillColor(fillColor)
+                .lineWidth(2)
+                .minDistance(10)
+                .depthTestEnabled(false)
+                .holes(holesList.toArray(Shape[]::new))
+                .build();
+
+        this.chunkLayerMap.get(new TanKey(world)).getMarkers().put(polyid, shapeMarker);
+    }
+
+    @Override
+    public void registerNewOccupiedArea(String polyid, TanTerritory territoryData, boolean b, String worldName, PolygonCoordinate coordinates, String infoWindowPopup, Collection<PolygonCoordinate> holes) {
+
+        World world = Bukkit.getWorld(worldName);
+        if (world == null) {
+            return;
+        }
+
 
         Shape shape = getVector(coordinates);
 
@@ -185,7 +226,7 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
         }
 
 
-        Color color = new Color(territoryData.getColor().asRGB());
+        Color color = new Color(255,0,0);
         Color lineColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.8f);
         Color fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.5f);
 
@@ -202,7 +243,7 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
                 .holes(holesList.toArray(Shape[]::new))
                 .build();
 
-        this.chunkLayerMap.get(new TanKey(world)).getMarkers().put(polyid, shapeMarker);
+        this.occupiedChunkLayerMap.get(new TanKey(world)).getMarkers().put(polyid, shapeMarker);
     }
 
     private static Shape getVector(PolygonCoordinate coordinates) {

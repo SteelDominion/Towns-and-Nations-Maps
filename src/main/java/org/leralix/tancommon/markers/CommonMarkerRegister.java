@@ -30,6 +30,16 @@ public abstract class CommonMarkerRegister {
                 chunkLayerConfig.getWorldsName()
         );
 
+        LayerConfig occupiedChunkLayerConfig = extractLayerData(cfg, "occupied_chunk_layer", "Occupied Territories");
+        setupOccupiedChunkLayer(
+                occupiedChunkLayerConfig.getId(),
+                occupiedChunkLayerConfig.getName(),
+                occupiedChunkLayerConfig.getMinZoom(),
+                occupiedChunkLayerConfig.getPriority(),
+                occupiedChunkLayerConfig.isHideByDefault(),
+                occupiedChunkLayerConfig.getWorldsName()
+        );
+
         LayerConfig landmarkLayerConfig = extractLayerData(cfg, "landmark_layer", "Landmarks");
         setupLandmarkLayer(
                 landmarkLayerConfig.getId(),
@@ -76,6 +86,8 @@ public abstract class CommonMarkerRegister {
 
     protected abstract void setupChunkLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName);
 
+    protected abstract void setupOccupiedChunkLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName);
+
     protected abstract void setupFortLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName);
 
     protected abstract void setupPropertyLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName);
@@ -90,6 +102,8 @@ public abstract class CommonMarkerRegister {
     public abstract void registerNewProperty(TanProperty tanProperty);
 
     public abstract void registerNewArea(String polyid, TanTerritory territoryData, boolean b, String worldName, PolygonCoordinate coordinates, String infoWindowPopup, Collection<PolygonCoordinate> holes);
+
+    public abstract void registerNewOccupiedArea(String polyid, TanTerritory territoryData, boolean b, String worldName, PolygonCoordinate coordinates, String infoWindowPopup, Collection<PolygonCoordinate> holes);
 
     protected String generateDescription(TanLandmark landmark) {
 

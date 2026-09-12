@@ -52,6 +52,11 @@ public class DynmapMarkerRegister extends CommonMarkerRegister {
     }
 
     @Override
+    protected void setupOccupiedChunkLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName) {
+        chunkMarkerSet = dynmapLayerAPI.createMarkerSet("chunks", name, null, false);
+    }
+
+    @Override
     protected void setupFortLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName) {
         fortMarkerSet = dynmapLayerAPI.createMarkerSet("forts", name, null, false);
     }

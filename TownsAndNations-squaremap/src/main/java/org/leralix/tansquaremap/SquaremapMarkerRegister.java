@@ -54,6 +54,11 @@ public class SquaremapMarkerRegister extends CommonMarkerRegister {
     }
 
     @Override
+    protected void setupOccupiedChunkLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName) {
+        setupLayer(id, name, chunkLayerPriority, hideByDefault, worldsName, chunkLayerMap);
+    }
+
+    @Override
     protected void setupFortLayer(String id, String name, int minZoom, int chunkLayerPriority, boolean hideByDefault, List<String> worldsName) {
         setupLayer(id, name, chunkLayerPriority, hideByDefault, worldsName, fortLayerMap);
     }
