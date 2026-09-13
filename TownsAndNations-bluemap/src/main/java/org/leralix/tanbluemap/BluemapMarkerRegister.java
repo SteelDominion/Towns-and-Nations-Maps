@@ -210,7 +210,7 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
     }
 
     @Override
-    public void registerNewOccupiedArea(String polyid, TanTerritory territoryData, boolean b, String worldName, PolygonCoordinate coordinates, String infoWindowPopup, Collection<PolygonCoordinate> holes) {
+    public void registerNewOccupiedArea(String polyid, TanTerritory territoryData, boolean b, String worldName, PolygonCoordinate coordinates, String occupiedInfoWindowPopup, Collection<PolygonCoordinate> holes) {
 
         World world = Bukkit.getWorld(worldName);
         if (world == null) {
@@ -227,17 +227,17 @@ public class BluemapMarkerRegister extends CommonMarkerRegister {
 
 
         Color color = new Color(255,0,0);
-        Color lineColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.8f);
+        Color lineColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 1f);
         Color fillColor = new Color(color.getRed(), color.getGreen(), color.getBlue(), 0.5f);
 
 
         ShapeMarker shapeMarker = ShapeMarker.builder()
-                .shape(shape, 70)
-                .label(territoryData.getName())
-                .detail(infoWindowPopup)
+                .shape(shape, 75)
+                .label("Occupied "+territoryData.getName())
+                .detail(occupiedInfoWindowPopup)
                 .lineColor(lineColor)
                 .fillColor(fillColor)
-                .lineWidth(2)
+                .lineWidth(5)
                 .minDistance(10)
                 .depthTestEnabled(false)
                 .holes(holesList.toArray(Shape[]::new))

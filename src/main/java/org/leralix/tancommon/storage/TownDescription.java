@@ -109,6 +109,13 @@ public class TownDescription {
 
         return message;
     }
+    
+    public String getOccupiedChunkDescription(){
+
+        String description = "Occupied " + this.name;
+
+        return description;
+    }
 
     private String getMemberList() {
         StringBuilder memberList = new StringBuilder();

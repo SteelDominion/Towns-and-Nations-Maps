@@ -57,8 +57,6 @@ public class RegionDescription {
         return uuid;
     }
 
-
-
     public String getChunkDescription(){
 
         String description = TownsAndNationsMapCommon.getPlugin().getConfig().getString("region_infowindow", "Config not found - region");
@@ -70,6 +68,13 @@ public class RegionDescription {
         description  = description.replace("%NUMBER_OF_TOWNS%", String.valueOf(this.numberOfTowns));
         description  = description.replace("%REGION_CAPITAL%", capitalName);
         description  = description.replace("%TOWN_LIST%", getMemberList());
+
+        return description;
+    }
+    
+    public String getOccupiedChunkDescription(){
+
+        String description = "Occupied " + this.name;
 
         return description;
     }

@@ -33,18 +33,21 @@ public class ChunkManager {
 
     public void update(TanTown town){
         String infoWindowPopup = TownDescriptionStorage.get(town.getID()).getChunkDescription();
-        updateTerritory(town, infoWindowPopup);
+        String occupiedInfoWindowPopup = TownDescriptionStorage.get(town.getID()).getOccupiedChunkDescription();
+        updateTerritory(town, infoWindowPopup, occupiedInfoWindowPopup);
     }
     public void update(TanRegion region) {
         String infoWindowPopup = RegionDescriptionStorage.get(region.getID()).getChunkDescription();
-        updateTerritory(region, infoWindowPopup);
+        String occupiedInfoWindowPopup = RegionDescriptionStorage.get(region.getID()).getOccupiedChunkDescription();
+        updateTerritory(region, infoWindowPopup, occupiedInfoWindowPopup);
     }
     public void update(TanNation nation) {
         String infoWindowPopup = NationDescriptionStorage.get(nation.getID()).getChunkDescription();
-        updateTerritory(nation, infoWindowPopup);
+        String occupiedInfoWindowPopup = NationDescriptionStorage.get(nation.getID()).getOccupiedChunkDescription();
+        updateTerritory(nation, infoWindowPopup, occupiedInfoWindowPopup);
     }
 
-    private void updateTerritory(TanTerritory territory, String infoWindowPopup) {
+    private void updateTerritory(TanTerritory territory, String infoWindowPopup, String occupiedInfoWindowPopup) {
 
         int claimedPolyIndex = 0; /* Index of polygon for when a town has multiple shapes. */
 
@@ -169,7 +172,7 @@ public class ChunkManager {
             for(TanClaimedChunk occupiedChunk : occupiedChunksToDraw) {
                 int tbX = occupiedChunk.getX();
                 int tbZ = occupiedChunk.getZ();
-                System.out.println("Chunk Loaded: X:"+tbX+" Z:"+tbZ);
+                
                 World world = Bukkit.getWorld(occupiedChunk.getWorldUUID());
                 if(ourShape == null && world != currentOccupiedWorld) {
                     currentOccupiedWorld = world;
@@ -203,7 +206,7 @@ public class ChunkManager {
             }
             occupiedChunksToDraw = townBlockLeftToDraw; /* Replace list (null if no more to process) */
             if(ourShape != null) {
-                 occupiedPolyIndex = traceOccupiedTerritoryOutline(territory, occupiedPolyIndex, infoWindowPopup, currentOccupiedWorld.getName(), ourShape, minx, minz);
+                 occupiedPolyIndex = traceOccupiedTerritoryOutline(territory, occupiedPolyIndex, occupiedInfoWindowPopup, currentOccupiedWorld.getName(), ourShape, minx, minz);
             }
         }
 

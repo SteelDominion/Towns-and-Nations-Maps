@@ -60,8 +60,6 @@ public class NationDescription {
         return uuid;
     }
 
-
-
     public String getChunkDescription(){
 
         String description = TownsAndNationsMapCommon.getPlugin().getConfig().getString("nation_infowindow", "Config not found - nation");
@@ -73,6 +71,13 @@ public class NationDescription {
         description  = description.replace("%NUMBER_OF_TOWNS%", String.valueOf(this.numberOfTowns));
         description  = description.replace("%NATION_CAPITAL%", capitalName);
         description  = description.replace("%TOWN_LIST%", getMemberList());
+
+        return description;
+    }
+
+    public String getOccupiedChunkDescription(){
+
+        String description = "Occupied " + this.name;
 
         return description;
     }
